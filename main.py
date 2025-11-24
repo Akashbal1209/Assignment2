@@ -2,7 +2,7 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 
-def fetch_data(tickers, start="2021-10-08", end="2025-10-08"):
+def fetch_data(tickers, start="2021-11-24", end="2025-11-24"):
     """Fetch historical closing prices for given tickers between start and end dates."""
     return yf.download(tickers, start=start, end=end)['Close'].dropna()
 
