@@ -43,9 +43,3 @@ Daily returns correlation: slightly lower, showing realistic movement
 
 Visual plots to understand the relationship between the two stocks
 
-## Author
-
-Priyansh Vashishtha
-
-Date: Oct 2025
-
