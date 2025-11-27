@@ -1,45 +1,123 @@
-# Stock Correlation Matrix – MAH Scooter & Bajaj Holdings
+# Stock Correlation Analysis
 
-## Description
-This project analyzes the relationship between **Mahindra Scooter (MAHSCOOTER.NS)** and **Bajaj Holdings (BAJAJHLDNG.NS)** over the past **5 years**.  
-It fetches historical stock prices, calculates the **correlation coefficient**, and presents a **correlation matrix** to show how closely the two stocks move together.
+A comprehensive Python-based tool for analyzing correlations between stock prices and returns, with visualizations and detailed reporting.
+
+## Overview
+
+This project analyzes the correlation between two stocks (Mahindra Scooters and Bajaj Holdings) over a 4-year period, providing insights into:
+- Price movements and correlations
+- Daily returns correlations
+- Rolling correlation trends
+- Risk metrics and performance statistics
 
 ## Features
-- Fetch historical stock prices using Yahoo Finance (`yfinance`)
-- Compute correlation on **prices** and **daily returns**
-- Generate **heatmaps** to visualize correlations
-- Plot **stock price trends** and **scatter matrix of returns**
-- Display **rolling 90-day correlation** to see changes over time
+
+- **Data Fetching**: Automatically downloads historical stock data using Yahoo Finance API
+- **Multiple Correlation Types**: Analyzes price correlation, returns correlation, and log returns correlation
+- **Comprehensive Visualizations**: Generates a multi-panel chart showing:
+  - Normalized price trends
+  - Returns scatter plot with regression line
+  - 30-day rolling correlation
+- **Excel Export**: Saves all data and analysis to a multi-sheet Excel workbook
+- **Text Report**: Generates a detailed summary report with all key statistics
+
+## Requirements
+
+```
+yfinance
+pandas
+numpy
+matplotlib
+seaborn
+openpyxl
+```
 
 ## Installation
-Make sure you have Python installed (>=3.8) and install the required packages:
 
+1. Create a virtual environment (recommended):
 ```bash
-pip install yfinance pandas matplotlib seaborn
+python -m venv venv
 ```
-## Run the Project
 
-After installing the required packages, run the script using:
+2. Activate the virtual environment:
+- Windows: `venv\Scripts\activate`
+- macOS/Linux: `source venv/bin/activate`
 
+3. Install required packages:
+```bash
+pip install yfinance pandas numpy matplotlib seaborn openpyxl
+```
+
+## Usage
+
+Simply run the main script:
 ```bash
 python main.py
 ```
 
-## Outputs:
+## Output Files
 
-Correlation matrix of prices
+The script generates three output files:
 
-Correlation matrix of daily returns
+1. **correlation_analysis.png** - Comprehensive visualization with 4 panels:
+   - Normalized stock prices (base = 100)
+   - Returns correlation scatter plot
+   - 30-day rolling correlation
 
-Heatmaps and plots for visualization
+2. **stock_analysis_results.xlsx** - Excel workbook with 11 sheets:
+   - Prices (raw historical data)
+   - Daily Returns
+   - Log Returns
+   - Price Statistics
+   - Returns Statistics
+   - Correlation Summary
+   - Price Correlation Matrix
+   - Returns Correlation Matrix
+   - Key Metrics (Sharpe Ratio, Max Drawdown, etc.)
+   - Rolling Correlation
+   - Cumulative Returns
 
-Rolling correlation plot
+3. **analysis_report.txt** - Detailed text report with:
+   - Complete price and returns statistics
+   - All correlation matrices
+   - Key performance metrics
+   - Risk indicators
 
-## Example Output
+## Key Findings (Example)
 
-Correlation of prices: ~0.94 → indicates strong positive correlation
+Based on the analysis period (2021-11-24 to 2025-11-24):
 
-Daily returns correlation: slightly lower, showing realistic movement
+- **Price Correlation**: 0.9459 (very high - stocks move together)
+- **Returns Correlation**: 0.3292 (moderate - daily returns less correlated)
+- **Trading Days Analyzed**: 989
 
-Visual plots to understand the relationship between the two stocks
+This demonstrates an important concept: while stock prices may trend together over time, their daily returns show more independence, suggesting different short-term volatility patterns.
 
+## Customization
+
+To analyze different stocks, modify the `tickers` list in the `main()` function:
+
+```python
+tickers = ["YOUR_STOCK1.NS", "YOUR_STOCK2.NS"]
+```
+
+To change the analysis period, modify the date range in `fetch_data()`:
+
+```python
+prices = fetch_data(tickers, start="YYYY-MM-DD", end="YYYY-MM-DD")
+```
+
+## Understanding the Metrics
+
+- **Price Correlation**: Measures how the stock prices move together over time
+- **Returns Correlation**: Measures how daily percentage changes are related
+- **Sharpe Ratio**: Risk-adjusted return (higher is better)
+- **Max Drawdown**: Largest peak-to-trough decline (indicates risk)
+- **Volatility**: Standard deviation of returns (indicates price stability)
+
+## Notes
+
+- The script uses adjusted closing prices for accuracy
+- All returns are calculated as percentage changes
+- Sharpe ratios assume a risk-free rate of 0
+- Rolling correlations use a 30-day window
